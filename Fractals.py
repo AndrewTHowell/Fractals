@@ -3,41 +3,41 @@ import turtle
 screen = turtle.getscreen()
 
 initialLength = 150
-division = 3
-levels = 4
-angle = 150
-branches = 6
+division = 1.4
+levels = 12
+angle = 90
+branches = 2
 
 cursor = screen.turtles()[0]
 cursor.hideturtle()
 cursor.setheading(90)
-cursor.up()
-
-cursor.backward(initialLength)
-
-cursor.down()
 cursor.speed(0)
 
+if angle < 45:
+    cursor.up()
+    cursor.backward(initialLength)
+    cursor.down()
 
-def drawFractal(cursor, size, levelsLeft):
+
+def drawFractal(fractalCursor, size, levelsLeft):
     if not levelsLeft:
         return
 
-    initialPos = cursor.pos()
-    initialHeading = cursor.heading()
+    initialPos = fractalCursor.pos()
+    initialHeading = fractalCursor.heading()
 
     branchAngle = (2 * angle)/(branches - 1)
 
     for i in range(branches):
-        cursor.left(angle)
-        cursor.right(i * branchAngle)
-        cursor.forward(size)
-        drawFractal(cursor, size/division, levelsLeft - 1)
+        fractalCursor.left(angle)
+        fractalCursor.right(i * branchAngle)
+        fractalCursor.forward(size)
+        drawFractal(fractalCursor, size / division, levelsLeft - 1)
 
-        cursor.up()
-        cursor.setpos(initialPos)
-        cursor.setheading(initialHeading)
-        cursor.down()
+        fractalCursor.up()
+        fractalCursor.setpos(initialPos)
+        fractalCursor.setheading(initialHeading)
+        fractalCursor.down()
 
 
 drawFractal(cursor, initialLength, levels)
